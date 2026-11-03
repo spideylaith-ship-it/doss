@@ -1,4 +1,4 @@
-import { LandedCostCalculation } from '../types/index.js';
+import type { LandedCostCalculation } from '../types/index.ts';
 
 export interface LandedCostInput {
   purchasePriceCurrency: 'USD' | 'EUR' | 'CNY' | 'JOD';

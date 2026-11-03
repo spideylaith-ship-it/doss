@@ -148,6 +148,60 @@ export interface AppSettings {
   defaultClearancePort: string;
 }
 
+// --- AI Business Brain Types ---
+
+export interface WebCitation {
+  uri: string;
+  title: string;
+  researchedAt: string;
+}
+
+export interface AiToolExecutionTrace {
+  toolName: string;
+  args: Record<string, any>;
+  summaryAr: string;
+  resultPreview?: any;
+  timestamp: string;
+}
+
+export interface AiDraftAction {
+  id: string;
+  type: 'draft_product_evaluation' | 'draft_team_task';
+  status: 'pending_confirmation' | 'confirmed_saved' | 'discarded';
+  createdByUserId: TeamMemberId;
+  createdAt: string;
+  titleAr: string;
+  summaryAr: string;
+  payload: Record<string, any>;
+  savedRecordId?: string;
+}
+
+export interface AiMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  timestamp: string;
+  enableWebSearch?: boolean;
+  citations?: WebCitation[];
+  toolTraces?: AiToolExecutionTrace[];
+  draftActions?: AiDraftAction[];
+  transparencyMeta?: {
+    usedVerifiedDb: boolean;
+    usedLiveWebSearch: boolean;
+    usedLandedCostCalc: boolean;
+    draftCreatedCount: number;
+  };
+}
+
+export interface AiConversation {
+  id: string;
+  userId: TeamMemberId;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  messages: AiMessage[];
+}
+
 export interface AppDatabaseSchema {
   products: Product[];
   categories: ProductCategory[];
@@ -157,6 +211,8 @@ export interface AppDatabaseSchema {
   marketIntelligence: JordanMarketIntelligenceItem[];
   suppliers: SupplierRecord[];
   settings: AppSettings;
+  aiConversations?: AiConversation[];
+  aiDraftActions?: AiDraftAction[];
 }
 
 export interface DashboardMetrics {
