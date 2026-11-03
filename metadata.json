@@ -1,0 +1,6 @@
+{
+  "name": "DOSS UNIVERSE",
+  "description": "Commercial intelligence and product-discovery operating system for import, distribution, and trading in Jordan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
